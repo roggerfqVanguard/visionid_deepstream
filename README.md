@@ -10,6 +10,12 @@ This project implements a real-time computer vision pipeline using NVIDIA DeepSt
 
 The system leverages DeepStream's GPU-accelerated processing capabilities to perform these tasks efficiently in real-time.
 
+## Architecture
+
+![Architecture Diagram](Aquitectura_v1.drawio.svg)
+
+The diagram above illustrates the complete pipeline architecture showing how person detection, tracking, and face detection work together in the DeepStream framework.
+
 ## Key Components
 
 - **Person Detection**: YOLO11-based person detection model
