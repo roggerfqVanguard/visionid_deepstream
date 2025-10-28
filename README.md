@@ -12,7 +12,7 @@ The system leverages DeepStream's GPU-accelerated processing capabilities to per
 
 ## Architecture
 
-![Architecture Diagram](Aquitectura_v1.drawio.svg)
+![Architecture Diagram](Aquitectura_visionid_deepstream_v1.svg)
 
 The diagram above illustrates the complete pipeline architecture showing how person detection, tracking, and face detection work together in the DeepStream framework.
 
