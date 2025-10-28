@@ -1,0 +1,61 @@
+BaseConfig:
+  minDetectorConfidence: 0.35
+
+TargetManagement:
+  preserveStreamUpdateOrder: 0
+  maxTargetsPerStream: 150
+  minIouDiff4NewTarget: 0.75
+  minTrackerConfidence: 0.40         # less eager to push to shadow
+  probationAge: 5
+  maxShadowTrackingAge: 36           # ~2.4 s at 15 FPS; helps re-attach same ID
+  earlyTerminationAge: 3
+
+TrajectoryManagement:
+  useUniqueID: 0
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 1
+  checkClassMatch: 1
+
+  # Motion gate slightly wider since geometry is de-emphasized
+  thresholdMahalanobis: 11.0
+
+  # Candidate thresholds
+  minMatchingScore4Overall: 0.30
+  minMatchingScore4SizeSimilarity: 0.10
+  minMatchingScore4Iou: 0.25
+  minMatchingScore4ReidSimilarity: 0.65   # require high cosine sim (appearance first)
+
+  # Weights: ReID dominates
+  matchingScoreWeight4SizeSimilarity: 0.05
+  matchingScoreWeight4Iou: 0.15
+  matchingScoreWeight4ReidSimilarity: 0.80
+
+  # Tentative births (these use IoU only in your implementation)
+  tentativeDetectorConfidence: 0.35
+  minMatchingScore4TentativeIou: 0.40
+
+StateEstimator:
+  stateEstimatorType: 2
+  noiseWeightVar4Loc: 0.035
+  noiseWeightVar4Vel: 0.012
+  useAspectRatio: 1
+
+ReID:
+  reidType: 1
+  batchSize: 64
+  workspaceSize: 1000
+  reidFeatureSize: 256
+  reidHistorySize: 30                 # shorter history → less drift, crisper identity
+  inferDims: [3, 256, 128]
+  networkMode: 1
+  inputOrder: 0
+  colorFormat: 0
+  offsets: [123.6750, 116.2800, 103.5300]
+  netScaleFactor: 0.01735207
+  keepAspc: 1
+  addFeatureNormalization: 1
+  tltEncodedModel: "/opt/nvidia/deepstream/deepstream/samples/models/Tracker/resnet50_market1501.etlt"
+  tltModelKey: "nvidia_tao"
+  modelEngineFile: "/home/vanguardvision/DeepStream-Yolo/resnet50_market1501.etlt_b100_gpu0_fp16.engine"
